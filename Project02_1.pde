@@ -1,18 +1,19 @@
 //Big bad motherfucker
 
-Walker walker;
+Bag Bag;
 //Food food;
 
 int NUMBER_OF_FOOD = 50;
-int WALKER_SIZE = 50;
+int Bag_SIZE = 50;
 
 ArrayList <Food> food = new ArrayList<Food>();
+
 
 
 void setup() 
 {
   size(720, 720);
-  walker = new Walker(new PVector(width/2, height/2)); // pass in a pvec to walker class
+  Bag = new Bag(new PVector(width/2, height/2)); // pass in a pvec to Bag class
 
   //food = new Food(new PVector(width/2, height/2));
 
@@ -24,17 +25,20 @@ void setup()
 
 void draw()
 {
-  walker.walk();
-  walker.applyForce(new PVector(-0.1, 0));
-  drawWalker();
+  Bag.bag();
+  Bag.applyForce(new PVector(-0.1, 0));
+  drawBag();
   drawFood();
+  
+  
+  
 } //end draw
 
-void drawWalker() 
+void drawBag() 
 {
   noFill();
   //stroke(random(255), random(255), random(255));
-  rect(walker.location.x, walker.location.y, WALKER_SIZE, WALKER_SIZE);
+  rect(Bag.location.x, Bag.location.y, Bag_SIZE, Bag_SIZE);
 }
 
 void drawFood()
@@ -50,5 +54,5 @@ void drawFood()
 
 void mousePressed()
 {
-  walker.applyForce(new PVector(13, 0));
+  Bag.applyForce(new PVector(13, 0));
 }

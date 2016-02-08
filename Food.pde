@@ -17,11 +17,11 @@ class Food
     this.diameter = FOOD_DIAMETER;
   }
 
-  Food(PVector location, float diameter)
-  {
-    this.location = location;
-    this.diameter = diameter;
-  }
+  //public Food(PVector location, float diameter)
+  //{
+  //  this.location = location;
+  //  this.diameter = diameter;
+  //}
   
   
   void drawFoodEllipse()
