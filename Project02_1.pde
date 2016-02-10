@@ -1,58 +1,65 @@
 //Big bad motherfucker
 
-Bag Bag;
-//Food food;
+Bag bag;
+ArrayList <Food> foods = new ArrayList<Food>();
 
-int NUMBER_OF_FOOD = 50;
-int Bag_SIZE = 50;
+final int NUMBER_OF_FOOD = 100;
+final int NUMBER_OF_COLORS = 10;
 
-ArrayList <Food> food = new ArrayList<Food>();
+color[] colorPalette = new color[NUMBER_OF_COLORS];
 
+int BAG_SIZE = 50;
 
 
 void setup() 
 {
-  size(720, 720);
-  Bag = new Bag(new PVector(width/2, height/2)); // pass in a pvec to Bag class
+  size(1080, 1080);
+  bag = new Bag(new PVector(width/2, height/2)); // pass in a pvec to Bag class
 
   //food = new Food(new PVector(width/2, height/2));
 
+  for (int i = 0; i < NUMBER_OF_COLORS; i++)
+  {
+    colorPalette[i] = color(random(0, 200));
+  }
+
   for (int i = 0; i < NUMBER_OF_FOOD; i++)
   {
-    food.add(new Food());
+    //food.add(new Food());
+    PVector foodLoc = new PVector(random(0, width), random(0, height));
+    color foodCol = colorPalette[(int)random(0, NUMBER_OF_COLORS)];
+    foods.add( new Food(foodLoc, foodCol) );
   }
 } //end setup
 
 void draw()
 {
-  Bag.bag();
-  Bag.applyForce(new PVector(-0.1, 0));
-  drawBag();
+  background(0, 255, 0);
+  bag.bagMotion();
+  bag.applyForce(new PVector(-0.1, 0));
+  bag.drawBag();
   drawFood();
-  
-  
-  
 } //end draw
 
-void drawBag() 
-{
-  noFill();
-  //stroke(random(255), random(255), random(255));
-  rect(Bag.location.x, Bag.location.y, Bag_SIZE, Bag_SIZE);
-}
 
-void drawFood()
+
+
+ void drawFood()
 {
-  //noFill();
-  //ellipse(food.location.x, food.location.y, 200, 200);
-  for (Food f : food)
+
+  for (int i = foods.size() - 1; i >= 0; --i)
   {
+    Food f = foods.get(i);
     f.drawFoodEllipse();
+    if (bag.isTouching(f))
+    {
+      bag.eat(f);
+      foods.remove(f);
+    }
   }
 }
 
-
 void mousePressed()
 {
-  Bag.applyForce(new PVector(13, 0));
+  bag.applyForce(new PVector(13, 0));
 }

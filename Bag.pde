@@ -4,6 +4,8 @@ class Bag
   final float NOISE_DELTA = 0.04;
   final int MAX_VELOCITY = 1;
   final float Tendency_TO_RIGHT = 1.6;
+  final int BAG_DIAMETER = 40;
+  final int BAG_FOOD_DIAMETER = 10;
 
   PVector location;
   PVector velocity;
@@ -11,6 +13,8 @@ class Bag
   PVector tendency; //wind to right
 
   float xOffset;
+
+  ArrayList<Food> data = new ArrayList<Food>();
 
   public Bag(PVector initialLocation)  //constr intoalize var ... initiallocation is var pass in 
   {
@@ -21,9 +25,8 @@ class Bag
     xOffset = 0.0;
   }
 
-  public void bag()
+  public void bagMotion()
   {
-
     acceleration = PVector.fromAngle(noise(xOffset) * TWO_PI); //noise need give a number
     velocity.add(acceleration);
     velocity.add(tendency);
@@ -33,28 +36,40 @@ class Bag
     xOffset += NOISE_DELTA;
 
     //Boundary reaction
-    if (location.y < 0) location.y = height; 
-
-    if (location.y > height)location.y = 0; 
-
-    if (location.x < 0) location.x = width; 
-
+    if (location.y < 0) location.y = height;
+    if (location.y > height)location.y = 0;
+    if (location.x < 0) location.x = width;
     if (location.x > width)location.x = 0;
+  }
+
+
+  public void drawBag() 
+  {
+    //draw Bag itself
+    ellipse(bag.location.x, bag.location.y, BAG_DIAMETER, BAG_DIAMETER);
+
+    //draw Bag's food
+    for (Food f : data)
+    {
+      fill(f.foodColor);
+      ellipse(f.foodLocation.x, f.foodLocation.y, BAG_FOOD_DIAMETER, BAG_FOOD_DIAMETER);
+    }
   }
 
   public void applyForce(PVector f)
   {
     velocity.add(f);
   }
-  
-  //boolean isThouching (Food f)
-  //{
-    
-  //}
-  
-  void eat()
+
+  boolean isTouching (Food f)
   {
-    
+    return dist(location.x, location.y, f.foodLocation.x, f.foodLocation.y ) < (BAG_DIAMETER/2 +f.diameter/2);
   }
-  
+
+  void eat(Food f)
+  {
+    data.add(f);
+    f.foodLocation.x = random(0, 200);
+    f.foodLocation.y = random(height - 200, height);
+  }
 } //end Walker class
