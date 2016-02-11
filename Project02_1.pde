@@ -17,6 +17,10 @@ final int  FUCKERS_MOTION_TOP_BOUNDARY = 0;
 final int  FUCKERS_MOTION_BOTTOM_BOUNDARY = 1080/2;
 
 Bag bag;
+Set set;
+Stack stack;
+Tree tree;
+
 ArrayList <Food> foods = new ArrayList<Food>();
 color[] colorPalette = new color[NUMBER_OF_COLORS];
 
@@ -24,8 +28,9 @@ void setup()
 {
   size(1080, 1080);
   bag = new Bag(new PVector(BAG_MOTION_INITAL_LOCX, BAG_MOTION_INITAL_LOCY)); // pass in a pvec to Bag class
-
-  //food = new Food(new PVector(width/2, height/2));
+  set = new Set(new PVector(BAG_MOTION_INITAL_LOCX, 20));
+  stack = new Stack(new PVector(BAG_MOTION_INITAL_LOCX, 70));
+  tree = new Tree(new PVector(BAG_MOTION_INITAL_LOCX, 400));
 
   for (int i = 0; i < NUMBER_OF_COLORS; i++)
   {
@@ -47,6 +52,16 @@ void draw()
   bag.bagMotion();
   bag.applyForce(new PVector(-0.1, 0));
   bag.drawBag();
+
+  set.setMotion();
+  set.drawSet();
+
+  stack.stackMotion();
+  stack.drawStack();
+
+  tree.treeMotion();
+  tree.drawTree();
+
   drawFood();
 } //end draw
 
