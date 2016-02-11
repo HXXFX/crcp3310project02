@@ -1,20 +1,29 @@
 //Big bad motherfucker
 
-Bag bag;
-ArrayList <Food> foods = new ArrayList<Food>();
-
-final int NUMBER_OF_FOOD = 100;
+final int NUMBER_OF_FOOD = 500;
 final int NUMBER_OF_COLORS = 10;
 
+final int FOOD_LEFT_BOUNDARY = 0;
+final int FOOD_RIGHT_BOUNDARY = 1080;
+final int FOOD_TOP_BOUNDARY = 0;
+final int FOOD_BOTTOM_BOUNDARY = 1080/2;
+
+final int BAG_MOTION_INITAL_LOCX = 50;
+final int BAG_MOTION_INITAL_LOCY = 250;
+
+final int  FUCKERS_MOTION_LEFT_BOUNDARY = 0;
+final int  FUCKERS_MOTION_RIGHT_BOUNDARY = 1080;
+final int  FUCKERS_MOTION_TOP_BOUNDARY = 0;
+final int  FUCKERS_MOTION_BOTTOM_BOUNDARY = 1080/2;
+
+Bag bag;
+ArrayList <Food> foods = new ArrayList<Food>();
 color[] colorPalette = new color[NUMBER_OF_COLORS];
-
-int BAG_SIZE = 50;
-
 
 void setup() 
 {
   size(1080, 1080);
-  bag = new Bag(new PVector(width/2, height/2)); // pass in a pvec to Bag class
+  bag = new Bag(new PVector(BAG_MOTION_INITAL_LOCX, BAG_MOTION_INITAL_LOCY)); // pass in a pvec to Bag class
 
   //food = new Food(new PVector(width/2, height/2));
 
@@ -26,7 +35,7 @@ void setup()
   for (int i = 0; i < NUMBER_OF_FOOD; i++)
   {
     //food.add(new Food());
-    PVector foodLoc = new PVector(random(0, width), random(0, height));
+    PVector foodLoc = new PVector(random(FOOD_LEFT_BOUNDARY, FOOD_RIGHT_BOUNDARY), random(FOOD_TOP_BOUNDARY, FOOD_BOTTOM_BOUNDARY));
     color foodCol = colorPalette[(int)random(0, NUMBER_OF_COLORS)];
     foods.add( new Food(foodLoc, foodCol) );
   }
@@ -41,10 +50,7 @@ void draw()
   drawFood();
 } //end draw
 
-
-
-
- void drawFood()
+void drawFood()
 {
 
   for (int i = foods.size() - 1; i >= 0; --i)

@@ -6,14 +6,16 @@ class Bag
   final float Tendency_TO_RIGHT = 1.6;
   final int BAG_DIAMETER = 40;
   final int BAG_FOOD_DIAMETER = 10;
+  final int BAG_FOOD_LEFT_BOUNDARY = 0;
+  final int BAG_FOOD_RIGHT_BOUNDARY = 200;
+  final int BAG_FOOD_TOP_BOUNDARY = height - 200;
+  final int BAG_FOOD_BOTTOM_BOUNDARY = height; 
 
   PVector location;
   PVector velocity;
   PVector acceleration;
   PVector tendency; //wind to right
-
   float xOffset;
-
   ArrayList<Food> data = new ArrayList<Food>();
 
   public Bag(PVector initialLocation)  //constr intoalize var ... initiallocation is var pass in 
@@ -36,10 +38,10 @@ class Bag
     xOffset += NOISE_DELTA;
 
     //Boundary reaction
-    if (location.y < 0) location.y = height;
-    if (location.y > height)location.y = 0;
-    if (location.x < 0) location.x = width;
-    if (location.x > width)location.x = 0;
+    if (location.x < FUCKERS_MOTION_LEFT_BOUNDARY) location.x = FUCKERS_MOTION_RIGHT_BOUNDARY;
+    if (location.x > FUCKERS_MOTION_RIGHT_BOUNDARY)location.x = FUCKERS_MOTION_LEFT_BOUNDARY;
+    if (location.y < FUCKERS_MOTION_TOP_BOUNDARY) location.y = FUCKERS_MOTION_BOTTOM_BOUNDARY;
+    if (location.y > FUCKERS_MOTION_BOTTOM_BOUNDARY)location.y = FUCKERS_MOTION_TOP_BOUNDARY;
   }
 
 
@@ -69,7 +71,7 @@ class Bag
   void eat(Food f)
   {
     data.add(f);
-    f.foodLocation.x = random(0, 200);
-    f.foodLocation.y = random(height - 200, height);
+    f.foodLocation.x = random(BAG_FOOD_LEFT_BOUNDARY, BAG_FOOD_RIGHT_BOUNDARY);
+    f.foodLocation.y = random(BAG_FOOD_TOP_BOUNDARY, BAG_FOOD_BOTTOM_BOUNDARY);
   }
 } //end Walker class

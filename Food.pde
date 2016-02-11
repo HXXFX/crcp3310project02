@@ -6,7 +6,6 @@ class Food
   PVector foodLocation = new PVector(0, 0);
   color foodColor;
 
-
   public Food(PVector foodLoc, color foodCol)
   {
 
