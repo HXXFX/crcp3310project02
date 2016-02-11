@@ -9,7 +9,13 @@ final int FOOD_TOP_BOUNDARY = 0;
 final int FOOD_BOTTOM_BOUNDARY = 1080/2;
 
 final int BAG_MOTION_INITAL_LOCX = 50;
-final int BAG_MOTION_INITAL_LOCY = 250;
+final int BAG_MOTION_INITAL_LOCY = 60;
+final int SET_MOTION_INITAL_LOCX = 50;
+final int SET_MOTION_INITAL_LOCY = 190;
+final int STACK_MOTION_INITAL_LOCX = 50;
+final int STACK_MOTION_INITAL_LOCY = 290;
+final int TREE_MOTION_INITAL_LOCX = 50;
+final int TREE_MOTION_INITAL_LOCY = 490;
 
 final int  FUCKERS_MOTION_LEFT_BOUNDARY = 0;
 final int  FUCKERS_MOTION_RIGHT_BOUNDARY = 1080;
@@ -28,9 +34,9 @@ void setup()
 {
   size(1080, 1080);
   bag = new Bag(new PVector(BAG_MOTION_INITAL_LOCX, BAG_MOTION_INITAL_LOCY)); // pass in a pvec to Bag class
-  set = new Set(new PVector(BAG_MOTION_INITAL_LOCX, 20));
-  stack = new Stack(new PVector(BAG_MOTION_INITAL_LOCX, 70));
-  tree = new Tree(new PVector(BAG_MOTION_INITAL_LOCX, 400));
+  set = new Set(new PVector(SET_MOTION_INITAL_LOCX, SET_MOTION_INITAL_LOCY));
+  stack = new Stack(new PVector(STACK_MOTION_INITAL_LOCX, STACK_MOTION_INITAL_LOCY));
+  tree = new Tree(new PVector(TREE_MOTION_INITAL_LOCX, TREE_MOTION_INITAL_LOCY));
 
   for (int i = 0; i < NUMBER_OF_COLORS; i++)
   {
@@ -49,6 +55,9 @@ void setup()
 void draw()
 {
   background(0, 255, 0);
+
+  drawFood();
+
   bag.bagMotion();
   bag.applyForce(new PVector(-0.1, 0));
   bag.drawBag();
@@ -61,13 +70,10 @@ void draw()
 
   tree.treeMotion();
   tree.drawTree();
-
-  drawFood();
 } //end draw
 
 void drawFood()
 {
-
   for (int i = foods.size() - 1; i >= 0; --i)
   {
     Food f = foods.get(i);
@@ -75,6 +81,22 @@ void drawFood()
     if (bag.isTouching(f))
     {
       bag.eat(f);
+      foods.remove(f);
+    }
+
+    if (set.isTouching(f))
+    {
+      set.eat(f);
+      foods.remove(f);
+    }
+    if (stack.isTouching(f))
+    {
+      stack.eat(f);
+      foods.remove(f);
+    }
+    if (tree.isTouching(f))
+    {
+      tree.eat(f);
       foods.remove(f);
     }
   }
