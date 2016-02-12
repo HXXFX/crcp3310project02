@@ -1,10 +1,12 @@
+import java.util.*;
+
 //Big bad motherfucker
 
-final int NUMBER_OF_FOOD = 500;
+final int NUMBER_OF_FOOD = 50;
 final int NUMBER_OF_COLORS = 10;
 
-final int FOOD_LEFT_BOUNDARY = 0;
-final int FOOD_RIGHT_BOUNDARY = 1080;
+final int FOOD_LEFT_BOUNDARY = 30;
+final int FOOD_RIGHT_BOUNDARY = 200;
 final int FOOD_TOP_BOUNDARY = 0;
 final int FOOD_BOTTOM_BOUNDARY = 1080/2;
 
@@ -40,7 +42,7 @@ void setup()
 
   for (int i = 0; i < NUMBER_OF_COLORS; i++)
   {
-    colorPalette[i] = color(random(0, 200));
+    colorPalette[i] = color(random(100, 250), random(100, 250), random(100, 250));
   }
 
   for (int i = 0; i < NUMBER_OF_FOOD; i++)
@@ -57,6 +59,11 @@ void draw()
   background(0, 255, 0);
 
   drawFood();
+  
+  pushMatrix();
+  translate(500, 0);
+  drawFood();
+  popMatrix();
 
   bag.bagMotion();
   bag.applyForce(new PVector(-0.1, 0));

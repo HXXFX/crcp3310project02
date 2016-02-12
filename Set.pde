@@ -17,6 +17,8 @@ class Set
   PVector tendency; //wind to right
   float xOffset;
   ArrayList<Food> data = new ArrayList<Food>();
+  //Set<Food> data1 = new HashSet<Food>(500);
+  boolean iWantToEat = false;
 
   public Set(PVector initialLocation)  //constr intoalize var ... initiallocation is var pass in 
   {
@@ -51,10 +53,11 @@ class Set
     ellipse(set.location.x, set.location.y, SET_DIAMETER, SET_DIAMETER);
 
     //draw Set's food
+
     for (Food f : data)
     {
       fill(f.foodColor);
-      ellipse(f.foodLocation.x, f.foodLocation.y, SET_FOOD_DIAMETER, SET_FOOD_DIAMETER);
+      rect(f.foodLocation.x, f.foodLocation.y, SET_FOOD_DIAMETER, SET_FOOD_DIAMETER);
     }
   }
 
@@ -70,8 +73,20 @@ class Set
 
   void eat(Food f)
   {
-    data.add(f);
-    f.foodLocation.x = random(SET_FOOD_LEFT_BOUNDARY, SET_FOOD_RIGHT_BOUNDARY);
-    f.foodLocation.y = random(SET_FOOD_TOP_BOUNDARY, SET_FOOD_BOTTOM_BOUNDARY);
+    for (int i = data.size() - 1; i >= 0; --i)
+    {
+      int x = data.size();
+      if (data.indexOf(x) == data.indexOf(i))
+      {
+        iWantToEat = true;
+      }
+    }
+
+    if (iWantToEat == true)
+    {
+      data.add(f);
+      f.foodLocation.x = random(SET_FOOD_LEFT_BOUNDARY, SET_FOOD_RIGHT_BOUNDARY);
+      f.foodLocation.y = random(SET_FOOD_TOP_BOUNDARY, SET_FOOD_BOTTOM_BOUNDARY);
+    }
   }
 } //end Walker class
