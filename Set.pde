@@ -89,4 +89,11 @@ class Set
       f.foodLocation.y = random(SET_FOOD_TOP_BOUNDARY, SET_FOOD_BOTTOM_BOUNDARY);
     }
   }
+
+  void shitOut(Food f)
+  {
+    data.remove(f);
+    f.foodLocation.x = random(SET_FOOD_LEFT_BOUNDARY, SET_FOOD_RIGHT_BOUNDARY);
+    f.foodLocation.y = random(SET_FOOD_TOP_BOUNDARY, SET_FOOD_BOTTOM_BOUNDARY);
+  }
 } //end Walker class

@@ -74,4 +74,11 @@ class Stack
     f.foodLocation.x = random(STACK_FOOD_LEFT_BOUNDARY, STACK_FOOD_RIGHT_BOUNDARY);
     f.foodLocation.y = random(STACK_FOOD_TOP_BOUNDARY, STACK_FOOD_BOTTOM_BOUNDARY);
   }
+
+  void shitOut(Food f)
+  {
+    data.remove(f);
+    f.foodLocation.x = random(STACK_FOOD_LEFT_BOUNDARY, STACK_FOOD_RIGHT_BOUNDARY);
+    f.foodLocation.y = random(STACK_FOOD_TOP_BOUNDARY, STACK_FOOD_BOTTOM_BOUNDARY);
+  }
 } //end Walker class

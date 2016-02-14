@@ -74,4 +74,11 @@ class Tree
     f.foodLocation.x = random(TREE_FOOD_LEFT_BOUNDARY, TREE_FOOD_RIGHT_BOUNDARY);
     f.foodLocation.y = random(TREE_FOOD_TOP_BOUNDARY, TREE_FOOD_BOTTOM_BOUNDARY);
   }
+
+  void shitOut(Food f)
+  {
+    data.remove(f);
+    f.foodLocation.x = random(TREE_FOOD_LEFT_BOUNDARY, TREE_FOOD_RIGHT_BOUNDARY);
+    f.foodLocation.y = random(TREE_FOOD_TOP_BOUNDARY, TREE_FOOD_BOTTOM_BOUNDARY);
+  }
 } //end Walker class

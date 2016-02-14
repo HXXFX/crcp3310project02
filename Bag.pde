@@ -67,11 +67,22 @@ class Bag
   {
     return dist(location.x, location.y, f.foodLocation.x, f.foodLocation.y ) < (BAG_DIAMETER/2 +f.diameter/2);
   }
+  
+    boolean isTouching (Shit f)
+  {
+    return dist(location.x, location.y, f.shitLocation.x, f.shitLocation.y ) < (BAG_DIAMETER/2 +f.diameter/2);
+  }
 
   void eat(Food f)
   {
     data.add(f);
     f.foodLocation.x = random(BAG_FOOD_LEFT_BOUNDARY, BAG_FOOD_RIGHT_BOUNDARY);
     f.foodLocation.y = random(BAG_FOOD_TOP_BOUNDARY, BAG_FOOD_BOTTOM_BOUNDARY);
+  }
+
+  void shitOut(Food f)
+  {
+    println("Taking a shit.");
+    data.remove(f);
   }
 } //end Walker class
