@@ -6,18 +6,18 @@ class Set
   final float Tendency_TO_RIGHT = 1.6;
   final int SET_DIAMETER = 40;
   final int SET_FOOD_DIAMETER = 10;
-  final int SET_FOOD_LEFT_BOUNDARY = 220;
-  final int SET_FOOD_RIGHT_BOUNDARY = 400;
-  final int SET_FOOD_TOP_BOUNDARY = height - 200;
-  final int SET_FOOD_BOTTOM_BOUNDARY = height; 
+  final int SET_FOOD_LEFT_BOUNDARY = 339;
+  final int SET_FOOD_RIGHT_BOUNDARY = 544;
+  final int SET_FOOD_TOP_BOUNDARY = 525;
+  final int SET_FOOD_BOTTOM_BOUNDARY = 685; 
 
   PVector location;
   PVector velocity;
   PVector acceleration;
   PVector tendency; //wind to right
   float xOffset;
-  ArrayList<Food> data = new ArrayList<Food>();
-  //Set<Food> data1 = new HashSet<Food>(500);
+  ArrayList<Food> setData = new ArrayList<Food>();
+  //Set<Food> setData1 = new HashSet<Food>(500);
   boolean iWantToEat = false;
 
   public Set(PVector initialLocation)  //constr intoalize var ... initiallocation is var pass in 
@@ -54,7 +54,7 @@ class Set
 
     //draw Set's food
 
-    for (Food f : data)
+    for (Food f : setData)
     {
       fill(f.foodColor);
       rect(f.foodLocation.x, f.foodLocation.y, SET_FOOD_DIAMETER, SET_FOOD_DIAMETER);
@@ -73,18 +73,21 @@ class Set
 
   void eat(Food f)
   {
-    for (int i = data.size() - 1; i >= 0; --i)
+    
+    for (int i = 0; i < setData.size(); i++)
     {
-      int x = data.size();
-      if (data.indexOf(x) == data.indexOf(i))
+      println("!!!");
+      int x = setData.size();
+      if (setData.indexOf(x) == setData.indexOf(i))
       {
         iWantToEat = true;
+        
       }
     }
 
     if (iWantToEat == true)
     {
-      data.add(f);
+      setData.add(f);
       f.foodLocation.x = random(SET_FOOD_LEFT_BOUNDARY, SET_FOOD_RIGHT_BOUNDARY);
       f.foodLocation.y = random(SET_FOOD_TOP_BOUNDARY, SET_FOOD_BOTTOM_BOUNDARY);
     }
@@ -92,7 +95,7 @@ class Set
 
   void shitOut(Food f)
   {
-    data.remove(f);
+    setData.remove(f);
     f.foodLocation.x = random(SET_FOOD_LEFT_BOUNDARY, SET_FOOD_RIGHT_BOUNDARY);
     f.foodLocation.y = random(SET_FOOD_TOP_BOUNDARY, SET_FOOD_BOTTOM_BOUNDARY);
   }

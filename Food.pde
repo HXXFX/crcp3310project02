@@ -1,7 +1,7 @@
 class Food
 {
   //CONTROL PANLE
-  float diameter = 20.0;
+  float diameter = 15.0;
 
   PVector foodLocation = new PVector(0, 0);
   color foodColor;
@@ -15,6 +15,7 @@ class Food
 
   void drawFoodEllipse()
   {
+    noStroke();
     fill(foodColor);
     ellipse(foodLocation.x, foodLocation.y, diameter, diameter);
   }

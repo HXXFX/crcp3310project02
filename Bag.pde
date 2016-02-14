@@ -4,19 +4,19 @@ class Bag
   final float NOISE_DELTA = 0.04;
   final int MAX_VELOCITY = 1;
   final float Tendency_TO_RIGHT = 1.6;
-  final int BAG_DIAMETER = 40;
+  final int BAG_DIAMETER = 25;
   final int BAG_FOOD_DIAMETER = 10;
-  final int BAG_FOOD_LEFT_BOUNDARY = 0;
-  final int BAG_FOOD_RIGHT_BOUNDARY = 200;
-  final int BAG_FOOD_TOP_BOUNDARY = height - 200;
-  final int BAG_FOOD_BOTTOM_BOUNDARY = height; 
+  final int BAG_FOOD_LEFT_BOUNDARY = 170;
+  final int BAG_FOOD_RIGHT_BOUNDARY = 326;
+  final int BAG_FOOD_TOP_BOUNDARY =  525;
+  final int BAG_FOOD_BOTTOM_BOUNDARY = 685; 
 
   PVector location;
   PVector velocity;
   PVector acceleration;
   PVector tendency; //wind to right
   float xOffset;
-  ArrayList<Food> data = new ArrayList<Food>();
+   //ArrayList<Food> bagData = new ArrayList<Food>();
 
   public Bag(PVector initialLocation)  //constr intoalize var ... initiallocation is var pass in 
   {
@@ -51,7 +51,7 @@ class Bag
     ellipse(bag.location.x, bag.location.y, BAG_DIAMETER, BAG_DIAMETER);
 
     //draw Bag's food
-    for (Food f : data)
+    for (Food f : bagData)
     {
       fill(f.foodColor);
       ellipse(f.foodLocation.x, f.foodLocation.y, BAG_FOOD_DIAMETER, BAG_FOOD_DIAMETER);
@@ -67,22 +67,12 @@ class Bag
   {
     return dist(location.x, location.y, f.foodLocation.x, f.foodLocation.y ) < (BAG_DIAMETER/2 +f.diameter/2);
   }
-  
-    boolean isTouching (Shit f)
-  {
-    return dist(location.x, location.y, f.shitLocation.x, f.shitLocation.y ) < (BAG_DIAMETER/2 +f.diameter/2);
-  }
 
   void eat(Food f)
   {
-    data.add(f);
+    bagData.add(f);
     f.foodLocation.x = random(BAG_FOOD_LEFT_BOUNDARY, BAG_FOOD_RIGHT_BOUNDARY);
     f.foodLocation.y = random(BAG_FOOD_TOP_BOUNDARY, BAG_FOOD_BOTTOM_BOUNDARY);
   }
 
-  void shitOut(Food f)
-  {
-    println("Taking a shit.");
-    data.remove(f);
-  }
 } //end Walker class
