@@ -1,24 +1,23 @@
-class Tree 
+class SexyQueue 
 {
   //CONTROL PANLE
   final float NOISE_DELTA = 0.04;
   final int MAX_VELOCITY = 1;
   final float Tendency_TO_RIGHT = 1.6;
-  final int TREE_DIAMETER = 40;
-  final int TREE_FOOD_DIAMETER = 10;
-  final int TREE_FOOD_LEFT_BOUNDARY = 620;
-  final int TREE_FOOD_RIGHT_BOUNDARY = 800;
-  final int TREE_FOOD_TOP_BOUNDARY = height - 200;
-  final int TREE_FOOD_BOTTOM_BOUNDARY = height; 
+  final int QUEUE_DIAMETER = 25;
+  final int QUEUE_FOOD_DIAMETER = 10;
+  final int QUEUE_FOOD_LEFT_BOUNDARY = 773;
+  final int QUEUE_FOOD_RIGHT_BOUNDARY = 990;
+  final int QUEUE_FOOD_TOP_BOUNDARY = 525;
+  final int QUEUE_FOOD_BOTTOM_BOUNDARY = 685; 
 
   PVector location;
   PVector velocity;
   PVector acceleration;
   PVector tendency; //wind to right
   float xOffset;
-  ArrayList<Food> data = new ArrayList<Food>();
 
-  public Tree(PVector initialLocation)  //constr intoalize var ... initiallocation is var pass in 
+  public SexyQueue(PVector initialLocation)  //constr intoalize var ... initiallocation is var pass in 
   {
     this.location  = initialLocation;
     velocity = new PVector(0, 0);
@@ -27,7 +26,7 @@ class Tree
     xOffset = 0.0;
   }
 
-  public void treeMotion()
+  public void queueMotion()
   {
     acceleration = PVector.fromAngle(noise(xOffset) * TWO_PI); //noise need give a number
     velocity.add(acceleration);
@@ -45,16 +44,16 @@ class Tree
   }
 
 
-  public void drawTree() 
+  public void drawQueue() 
   {
-    //draw Tree itself
-    ellipse(tree.location.x, tree.location.y, TREE_DIAMETER, TREE_DIAMETER);
+    //draw Queue itself
+    ellipse(queue.location.x, queue.location.y, QUEUE_DIAMETER, QUEUE_DIAMETER);
 
-    //draw Tree's food
-    for (Food f : data)
+    //draw Queue's food
+    for (Food f : queueData)
     {
       fill(f.foodColor);
-      ellipse(f.foodLocation.x, f.foodLocation.y, TREE_FOOD_DIAMETER, TREE_FOOD_DIAMETER);
+      ellipse(f.foodLocation.x, f.foodLocation.y, QUEUE_FOOD_DIAMETER, QUEUE_FOOD_DIAMETER);
     }
   }
 
@@ -65,20 +64,25 @@ class Tree
 
   boolean isTouching (Food f)
   {
-    return dist(location.x, location.y, f.foodLocation.x, f.foodLocation.y ) < (TREE_DIAMETER/2 +f.diameter/2);
+    return dist(location.x, location.y, f.foodLocation.x, f.foodLocation.y ) < (QUEUE_DIAMETER/2 +f.diameter/2);
   }
 
   void eat(Food f)
-  {
-    data.add(f);
-    f.foodLocation.x = random(TREE_FOOD_LEFT_BOUNDARY, TREE_FOOD_RIGHT_BOUNDARY);
-    f.foodLocation.y = random(TREE_FOOD_TOP_BOUNDARY, TREE_FOOD_BOTTOM_BOUNDARY);
+  {//600 600
+    println("queue is eating");
+    queueData.add(f);
+    f.foodLocation.y = 600;
+    //f.foodLocation.y = random(QUEUE_FOOD_TOP_BOUNDARY, QUEUE_FOOD_BOTTOM_BOUNDARY);
+    for (int i = 0; i < queueData.size(); i++)
+    {
+      f.foodLocation.x = 600 + i*15;
+    }
   }
 
   void shitOut(Food f)
   {
-    data.remove(f);
-    f.foodLocation.x = random(TREE_FOOD_LEFT_BOUNDARY, TREE_FOOD_RIGHT_BOUNDARY);
-    f.foodLocation.y = random(TREE_FOOD_TOP_BOUNDARY, TREE_FOOD_BOTTOM_BOUNDARY);
+    queueData.remove(f);
+    f.foodLocation.x = random(QUEUE_FOOD_LEFT_BOUNDARY, QUEUE_FOOD_RIGHT_BOUNDARY);
+    f.foodLocation.y = random(QUEUE_FOOD_TOP_BOUNDARY, QUEUE_FOOD_BOTTOM_BOUNDARY);
   }
 } //end Walker class
