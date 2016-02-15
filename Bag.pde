@@ -69,7 +69,7 @@ class Bag
   }
 
   void eat(Food f)
-  {
+  { println("bag is eating");
     bagData.add(f);
     f.foodLocation.x = random(BAG_FOOD_LEFT_BOUNDARY, BAG_FOOD_RIGHT_BOUNDARY);
     f.foodLocation.y = random(BAG_FOOD_TOP_BOUNDARY, BAG_FOOD_BOTTOM_BOUNDARY);

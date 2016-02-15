@@ -5,6 +5,7 @@ import java.util.*;
 PImage myBackground;
 
 ArrayList<Food> bagData = new ArrayList<Food>();
+Set<Food> setData = new HashSet<Food>();
 
 final int NUMBER_OF_FOOD = 15;
 final int NUMBER_OF_COLORS = 5;
@@ -18,8 +19,8 @@ final int BAG_MOTION_INITAL_LOCX = 133;
 final int BAG_MOTION_INITAL_LOCY = 135;
 final int SET_MOTION_INITAL_LOCX = 133;
 final int SET_MOTION_INITAL_LOCY = 180;
-final int STACK_MOTION_INITAL_LOCX = 50;
-final int STACK_MOTION_INITAL_LOCY = 290;
+final int STACK_MOTION_INITAL_LOCX = 133;
+final int STACK_MOTION_INITAL_LOCY = 301;
 final int TREE_MOTION_INITAL_LOCX = 50;
 final int TREE_MOTION_INITAL_LOCY = 490;
 
@@ -29,8 +30,8 @@ final int  FUCKERS_MOTION_TOP_BOUNDARY = 140;
 final int  FUCKERS_MOTION_BOTTOM_BOUNDARY = 341;
 
 Bag bag;
-Set set;
-Stack stack;
+SexySet set;
+SexyStack stack;
 Tree tree;
 
 //Set <Food> adsfasdfasdf = new Set<Food>();
@@ -48,9 +49,9 @@ void setup()
   size(1080, 791);
   myBackground = loadImage("DataStructureSafariConceptLow.jpg");
   bag = new Bag(new PVector(BAG_MOTION_INITAL_LOCX, BAG_MOTION_INITAL_LOCY)); // pass in a pvec to Bag class
-  set = new Set(new PVector(SET_MOTION_INITAL_LOCX, SET_MOTION_INITAL_LOCY));
-  stack = new Stack(new PVector(STACK_MOTION_INITAL_LOCX, STACK_MOTION_INITAL_LOCY));
-  tree = new Tree(new PVector(TREE_MOTION_INITAL_LOCX, TREE_MOTION_INITAL_LOCY));
+  set = new SexySet(new PVector(SET_MOTION_INITAL_LOCX, SET_MOTION_INITAL_LOCY));
+  stack = new SexyStack(new PVector(STACK_MOTION_INITAL_LOCX, STACK_MOTION_INITAL_LOCY));
+  //tree = new Tree(new PVector(TREE_MOTION_INITAL_LOCX, TREE_MOTION_INITAL_LOCY));
 
   for (int i = 0; i < NUMBER_OF_COLORS; i++)
   {
@@ -108,11 +109,11 @@ void draw()
   //bag.applyForce(new PVector(-0.1, 0));
   bag.drawBag();
 
-  set.setMotion();
-  set.drawSet();
+  //set.setMotion();
+  //set.drawSet();
 
-  //stack.stackMotion();
-  //stack.drawStack();
+  stack.stackMotion();
+  stack.drawStack();
 
   //tree.treeMotion();
   //tree.drawTree();
@@ -135,16 +136,17 @@ void drawFood()
       set.eat(f);
       foods.remove(f);
     }
+    
     if (stack.isTouching(f))
     {
-      stack.eat(f);
-      foods.remove(f);
+     stack.eat(f);
+     foods.remove(f);
     }
-    if (tree.isTouching(f))
-    {
-      tree.eat(f);
-      foods.remove(f);
-    }
+    //if (tree.isTouching(f))
+    //{
+    //  tree.eat(f);
+    //  foods.remove(f);
+    //}
   }
 }
 
@@ -169,6 +171,18 @@ void drawFood1()
           println("bag is shiting");
         }
       }
+          
+      //setData.toArray();
+      //Food d1 = setData[j];
+      //if (set.isTouching(f))
+      //{
+      //  foods1.remove(f);
+      //  if (f.foodColor == d.foodColor)
+      //  {
+      //    setData.remove(d1);
+      //    println("set is shiting");
+      //  }
+      //}
     }
   }
 }
