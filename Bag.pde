@@ -7,7 +7,7 @@ class Bag
   final int BAG_DIAMETER = 25;
   final int BAG_FOOD_DIAMETER = 10;
   final int BAG_FOOD_LEFT_BOUNDARY = 170;
-  final int BAG_FOOD_RIGHT_BOUNDARY = 326;
+  final int BAG_FOOD_RIGHT_BOUNDARY = 318;
   final int BAG_FOOD_TOP_BOUNDARY =  525;
   final int BAG_FOOD_BOTTOM_BOUNDARY = 685; 
 

@@ -5,8 +5,8 @@ import java.util.*;
 PImage myBackground;
 
 ArrayList<Food> bagData = new ArrayList<Food>();
-Set<Food> setData = new HashSet<Food>();
-//ArrayList<Food> stackData = new ArrayList<Food>();
+//Set<Food> setData = new HashSet<Food>();
+ArrayList<Food> setData = new ArrayList<Food>();
 Stack<Food> stackData = new Stack<Food>();
 
 
@@ -91,11 +91,11 @@ void draw()
 {
   //background(0, 255, 0);
   image(myBackground, 0, 0);
-  
+
   pushMatrix();
   drawFood();
   popMatrix();
-  
+
   pushMatrix();
   drawFood1();
   popMatrix();
@@ -131,6 +131,13 @@ void drawFood()
   for (int i = foods.size() - 1; i >= 0; --i)
   {
     Food f = foods.get(i);
+    //boolean seteat = true;
+
+    //if (foods.contains(f.foodColor))
+    //{
+    //  seteat = false;
+    //}
+
     f.drawFoodEllipse();
     if (bag.isTouching(f))
     {
@@ -166,6 +173,8 @@ void drawFood1()
 
     Food f = foods1.get(i);
     f.drawFoodEllipse();
+    
+    //forbag
     for (int j = 0; j < bagData.size(); j ++)
     {
       Food d = bagData.get(j);
@@ -180,38 +189,35 @@ void drawFood1()
       }
     }
 
+    //forset
+    for (int j = 0; j < setData.size(); j ++)
+    {
+      Food d = setData.get(j);
+      if (set.isTouching(f))
+      {
+        foods1.remove(f);
+        if (f.foodColor == d.foodColor)
+        {
+          setData.remove(d);
+          println("set is shiting");
+        }
+      }
+    }
 
-    //for (int j = 0; j < stackData.size(); j ++)
-    //{
-    //  //Food dStack = stackData.search(in j);
-    //  //Food topDStack = stackData.get(stackData.size());
-    //  if (stack.isTouching(f))
-    //  {
-    //    foods1.remove(f);
-    //    if (f.foodColor == dStack.foodColor)
-    //      //if (f.foodColor == dStack.foodColor)
-    //    {
-    //      println("????");
-    //      stackData.remove(dStack);
-    //      println("stack is shiting");
-    //    }
-    //  }
-    //}
-
-
+    //stack
     for (int j = 0; j < stackData.size(); j ++)
     {
-     Food dStack = stackData.peek();
-     if (stack.isTouching(f))
-     {
-       foods1.remove(f);
-       if (f.foodColor == dStack.foodColor)
-         //if (f.foodColor == dStack.foodColor)
-       {
-         stackData.remove(dStack);
-         println("stack is shiting");
-       }
-     }
+      Food dStack = stackData.peek();
+      if (stack.isTouching(f))
+      {
+        foods1.remove(f);
+        if (f.foodColor == dStack.foodColor)
+          //if (f.foodColor == dStack.foodColor)
+        {
+          stackData.remove(dStack);
+          println("stack is shiting");
+        }
+      }
     }
   }
 }
