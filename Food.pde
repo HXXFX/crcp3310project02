@@ -19,4 +19,9 @@ class Food
     fill(foodColor);
     ellipse(foodLocation.x, foodLocation.y, diameter, diameter);
   }
+
+  color getFoodColor()
+  {
+    return this.foodColor;
+  }
 }//end Food class
